@@ -1,10 +1,12 @@
 {
   "name": "@innexgo/frontend-auth-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Core utils and bindings to the authentication related parts of the api.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": ["lib/**/*"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -16,7 +18,7 @@
     "url": "https://github.com/innexgo/frontend-auth-api/issues"
   },
   "homepage": "https://github.com/innexgo/frontend-auth-api#readme",
-  "dependencies": {
+  "devDependencies": {
     "typescript": "^4.2.4"
   },
   "eslintConfig": {

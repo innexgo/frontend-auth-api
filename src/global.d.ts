@@ -19,7 +19,7 @@ declare global {
 
   type PasswordKind  = "CHANGE" | "RESET" | "CANCEL";
 
-  interface Password {
+  type Password = {
     passwordId: number,
     creationTime: number,
     creator: User,
