@@ -1,3 +1,46 @@
+export interface VerificationChallenge {
+  creationTime: number,
+  name: string,
+  email: string,
+}
+
+export interface User {
+  userId: number,
+  creationTime: number,
+  name: string,
+  email: string,
+}
+
+export interface PasswordReset {
+  creationTime: number;
+}
+
+export type PasswordKind = "CHANGE" | "RESET" | "CANCEL";
+
+export type Password = {
+  passwordId: number,
+  creationTime: number,
+  creator: User,
+  user: User,
+  kind: PasswordKind,
+}
+
+export type ApiKeyKind = "VALID" | "CANCEL";
+
+export interface ApiKey {
+  apiKeyId: number,
+  creationTime: number,
+  creator: User,
+  duration: number, // only valid if ApiKeyKind isn't CANCEL
+  key: string, // only valid if ApiKeyKind isn't CANCEL
+  apiKeyKind: ApiKeyKind,
+}
+
+export interface AuthenticatedComponentProps {
+  apiKey: ApiKey
+  setApiKey: (data: ApiKey | null) => void
+}
+
 /**
  * Returns a promise that will be resolved in some milliseconds
  * use await sleep(some milliseconds)
@@ -45,36 +88,34 @@ export async function fetchApi(url: string, data: FormData) {
 }
 
 export const ApiErrorCodes = [
-  "OK",
-  "NOT_FOUND",
   "NO_CAPABILITY",
   "API_KEY_UNAUTHORIZED",
   "PASSWORD_INCORRECT",
   "PASSWORD_INSECURE",
   "PASSWORD_CANNOT_CREATE_FOR_OTHERS",
-
   "USER_NONEXISTENT",
-
   "API_KEY_NONEXISTENT",
-
   "USER_EXISTENT",
   "USER_NAME_EMPTY",
   "USER_EMAIL_EMPTY",
   "USER_EMAIL_INVALIDATED",
-  "USER_KIND_INVALID",
-
+  "NEGATIVE_DURATION",
+  "CANNOT_ALTER_PAST",
   "VERIFICATION_CHALLENGE_NONEXISTENT",
   "VERIFICATION_CHALLENGE_TIMED_OUT",
-
   "PASSWORD_RESET_NONEXISTENT",
   "PASSWORD_EXISTENT",
+  "PASSWORD_NONEXISTENT",
   "PASSWORD_RESET_TIMED_OUT",
-
-  "EMAIL_RATELIMIT",
-  "EMAIL_BLACKLISTED",
-
+  "EMAIL_BOUNCED",
+  "EMAIL_UNKNOWN",
+  "NETWORK_ERROR",
+  "DECODE_ERROR",
+  "INTERNAL_SERVER_ERROR",
+  "METHOD_NOT_ALLOWED",
+  "BAD_REQUEST",
+  "NOT_FOUND",
   "UNKNOWN",
-  "NETWORK"
 ] as const;
 
 // Creates a union type
@@ -126,7 +167,6 @@ export async function newPasswordReset(props: NewPasswordResetProps): Promise<Pa
 }
 
 export type NewChangePasswordProps = {
-  userId: number,
   oldPassword: string,
   newPassword: string,
   apiKey: string
@@ -137,7 +177,6 @@ export async function newChangePassword(props: NewChangePasswordProps): Promise<
 }
 
 export type NewCancelPasswordProps = {
-  userId: number,
   apiKey: string
 }
 
@@ -153,13 +192,6 @@ export type NewResetPasswordProps = {
 
 export async function newResetPassword(props: NewResetPasswordProps): Promise<Password | ApiErrorCode> {
   return await fetchApi("password/newReset/", getFormData(props));
-}
-
-export type NewCourseProps = {
-  schoolId: number,
-  name: string,
-  description: string,
-  apiKey: string
 }
 
 export type ViewUserProps = {
@@ -188,7 +220,7 @@ export type ViewPasswordProps = {
   creatorUserId?: number, //
   userId?: number, //
   passwordKind?: PasswordKind, //
-  onlyRecent?: boolean,
+  onlyRecent: boolean,
   offset?: number,
   count?: number,
   apiKey: string,
@@ -209,7 +241,7 @@ export type ViewApiKeyProps = {
   minDuration?: number, //
   maxDuration?: number, //
   apiKeyKind?: ApiKeyKind, //
-  onlyRecent?: boolean, //
+  onlyRecent: boolean, //
   offset?: number,
   count?: number,
   apiKey: string,
