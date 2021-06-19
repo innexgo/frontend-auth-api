@@ -56,23 +56,25 @@ export function staticUrl() {
 }
 
 export function apiUrl() {
-  return staticUrl() + '/api';
-}
-
-function getFormData(data: object) {
-  const formData = new FormData();
-  Object.keys(data).forEach(key => formData.append(key, (data as any)[key]));
-  return formData;
+  return staticUrl() + '/api/auth';
 }
 
 // This function is guaranteed to only return ApiErrorCode | object
-export async function fetchApi(url: string, data: FormData) {
+export async function fetchApi(url: string, data: object) {
   // Catch all errors and always return a response
   const resp = await (async () => {
     try {
-      return await fetch(`${apiUrl()}/${url}`, {
-        method: 'POST',
-        body: data
+      return await fetch(url, {
+        method: 'POST',    // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors',      // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow',            // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data)     // body data type must match "Content-Type" header
       });
     } catch (e) {
       return new Response('"NETWORK"', { status: 400 })
@@ -128,7 +130,7 @@ export type NewValidApiKeyProps = {
 }
 
 export async function newValidApiKey(props: NewValidApiKeyProps): Promise<ApiKey | ApiErrorCode> {
-  return await fetchApi("apiKey/newValid/", getFormData(props));
+  return await fetchApi("apiKey/newValid/", props);
 }
 
 export type NewCancelApiKeyProps = {
@@ -137,7 +139,7 @@ export type NewCancelApiKeyProps = {
 }
 
 export async function newApiKeyCancel(props: NewCancelApiKeyProps): Promise<ApiKey | ApiErrorCode> {
-  return await fetchApi("apiKey/newCancel/", getFormData(props));
+  return await fetchApi("apiKey/newCancel/", props);
 }
 
 export type NewVerificationChallengeProps = {
@@ -147,7 +149,7 @@ export type NewVerificationChallengeProps = {
 };
 
 export async function newVerificationChallenge(props: NewVerificationChallengeProps): Promise<VerificationChallenge | ApiErrorCode> {
-  return await fetchApi("verificationChallenge/new/", getFormData(props));
+  return await fetchApi("verificationChallenge/new/", props);
 }
 
 export type NewUserProps = {
@@ -155,7 +157,7 @@ export type NewUserProps = {
 };
 
 export async function newUser(props: NewUserProps): Promise<User | ApiErrorCode> {
-  return await fetchApi("user/new/", getFormData(props));
+  return await fetchApi("user/new/", props);
 }
 
 export type NewPasswordResetProps = {
@@ -163,7 +165,7 @@ export type NewPasswordResetProps = {
 };
 
 export async function newPasswordReset(props: NewPasswordResetProps): Promise<PasswordReset | ApiErrorCode> {
-  return await fetchApi("passwordReset/new/", getFormData(props));
+  return await fetchApi("passwordReset/new/", props);
 }
 
 export type NewChangePasswordProps = {
@@ -173,7 +175,7 @@ export type NewChangePasswordProps = {
 }
 
 export async function newChangePassword(props: NewChangePasswordProps): Promise<Password | ApiErrorCode> {
-  return await fetchApi("password/newChange/", getFormData(props));
+  return await fetchApi("password/newChange/", props);
 }
 
 export type NewCancelPasswordProps = {
@@ -181,7 +183,7 @@ export type NewCancelPasswordProps = {
 }
 
 export async function newCancelPassword(props: NewCancelPasswordProps): Promise<Password | ApiErrorCode> {
-  return await fetchApi("password/newCancel/", getFormData(props));
+  return await fetchApi("password/newCancel/", props);
 }
 
 
@@ -191,7 +193,7 @@ export type NewResetPasswordProps = {
 }
 
 export async function newResetPassword(props: NewResetPasswordProps): Promise<Password | ApiErrorCode> {
-  return await fetchApi("password/newReset/", getFormData(props));
+  return await fetchApi("password/newReset/", props);
 }
 
 export type ViewUserProps = {
@@ -209,7 +211,7 @@ export type ViewUserProps = {
 
 
 export async function viewUser(props: ViewUserProps): Promise<User[] | ApiErrorCode> {
-  return await fetchApi("user/", getFormData(props));
+  return await fetchApi("user/", props);
 }
 
 export type ViewPasswordProps = {
@@ -227,7 +229,7 @@ export type ViewPasswordProps = {
 }
 
 export async function viewPassword(props: ViewPasswordProps): Promise<Password[] | ApiErrorCode> {
-  return await fetchApi("password/", getFormData(props));
+  return await fetchApi("password/", props);
 }
 
 
@@ -248,7 +250,7 @@ export type ViewApiKeyProps = {
 }
 
 export async function viewApiKey(props: ViewApiKeyProps): Promise<ApiKey[] | ApiErrorCode> {
-  return await fetchApi("apiKey/", getFormData(props));
+  return await fetchApi("apiKey/", props);
 }
 
 export function isApiErrorCode(maybeApiErrorCode: any): maybeApiErrorCode is ApiErrorCode {
