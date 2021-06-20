@@ -1,3 +1,5 @@
+import { fetchApi } from '@innexgo/frontend-common';
+
 export interface VerificationChallenge {
   creationTime: number,
   name: string,
@@ -41,55 +43,7 @@ export interface AuthenticatedComponentProps {
   setApiKey: (data: ApiKey | null) => void
 }
 
-/**
- * Returns a promise that will be resolved in some milliseconds
- * use await sleep(some milliseconds)
- * @param ms milliseconds to sleep for
- * @return a promise that will resolve in ms milliseconds
- */
-export function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export function staticUrl() {
-  return window.location.protocol + "//" + window.location.host;
-}
-
-export function apiUrl() {
-  return staticUrl() + '/api/auth';
-}
-
-// This function is guaranteed to only return ApiErrorCode | object
-export async function fetchApi(url: string, data: object) {
-  // Catch all errors and always return a response
-  const resp = await (async () => {
-    try {
-      return await fetch(url, {
-        method: 'POST',    // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors',      // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',            // manual, *follow, error
-        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(data)     // body data type must match "Content-Type" header
-      });
-    } catch (e) {
-      return new Response('"NETWORK"', { status: 400 })
-    }
-  })();
-
-  try {
-    let objResp = await resp.json();
-    return objResp;
-  } catch (e) {
-    return "UNKNOWN";
-  }
-}
-
-export const ApiErrorCodes = [
+export const AuthErrorCodes = [
   "NO_CAPABILITY",
   "API_KEY_UNAUTHORIZED",
   "PASSWORD_INCORRECT",
@@ -121,82 +75,82 @@ export const ApiErrorCodes = [
 ] as const;
 
 // Creates a union type
-export type ApiErrorCode = typeof ApiErrorCodes[number];
+export type AuthErrorCode = typeof AuthErrorCodes[number];
 
-export type NewValidApiKeyProps = {
+export type ValidApiKeyNewProps = {
   userEmail: string,
   userPassword: string,
   duration: number,
 }
 
-export async function newValidApiKey(props: NewValidApiKeyProps): Promise<ApiKey | ApiErrorCode> {
-  return await fetchApi("apiKey/newValid/", props);
+export async function newValidApiKey(props: ValidApiKeyNewProps): Promise<ApiKey | AuthErrorCode> {
+  return await fetchApi("auth/apiKey/new_valid/", props);
 }
 
-export type NewCancelApiKeyProps = {
+export type ApiKeyNewCancelProps = {
   apiKeyToCancel: string,
   apiKey: string,
 }
 
-export async function newApiKeyCancel(props: NewCancelApiKeyProps): Promise<ApiKey | ApiErrorCode> {
-  return await fetchApi("apiKey/newCancel/", props);
+export async function newApiKeyCancel(props: ApiKeyNewCancelProps): Promise<ApiKey | AuthErrorCode> {
+  return await fetchApi("auth/apiKey/new_cancel/", props);
 }
 
-export type NewVerificationChallengeProps = {
+export type VerificationChallengeNewProps = {
   userName: string,
   userEmail: string,
   userPassword: string,
 };
 
-export async function newVerificationChallenge(props: NewVerificationChallengeProps): Promise<VerificationChallenge | ApiErrorCode> {
-  return await fetchApi("verificationChallenge/new/", props);
+export async function newVerificationChallenge(props: VerificationChallengeNewProps): Promise<VerificationChallenge | AuthErrorCode> {
+  return await fetchApi("auth/verification_challenge/new/", props);
 }
 
-export type NewUserProps = {
+export type UserNewProps = {
   verificationChallengeKey: string,
 };
 
-export async function newUser(props: NewUserProps): Promise<User | ApiErrorCode> {
-  return await fetchApi("user/new/", props);
+export async function newUser(props: UserNewProps): Promise<User | AuthErrorCode> {
+  return await fetchApi("auth/user/new/", props);
 }
 
-export type NewPasswordResetProps = {
+export type PasswordResetNewProps = {
   userEmail: string,
 };
 
-export async function newPasswordReset(props: NewPasswordResetProps): Promise<PasswordReset | ApiErrorCode> {
-  return await fetchApi("passwordReset/new/", props);
+export async function newPasswordReset(props: PasswordResetNewProps): Promise<PasswordReset | AuthErrorCode> {
+  return await fetchApi("auth/password_reset/new/", props);
 }
 
-export type NewChangePasswordProps = {
+export type PasswordNewChangeProps = {
   oldPassword: string,
   newPassword: string,
   apiKey: string
 }
 
-export async function newChangePassword(props: NewChangePasswordProps): Promise<Password | ApiErrorCode> {
-  return await fetchApi("password/newChange/", props);
+export async function newChangePassword(props: PasswordNewChangeProps): Promise<Password | AuthErrorCode> {
+  return await fetchApi("auth/password/new_change/", props);
 }
 
-export type NewCancelPasswordProps = {
+export type PasswordNewCancelProps = {
   apiKey: string
 }
 
-export async function newCancelPassword(props: NewCancelPasswordProps): Promise<Password | ApiErrorCode> {
-  return await fetchApi("password/newCancel/", props);
+export async function newCancelPassword(props: PasswordNewCancelProps): Promise<Password | AuthErrorCode> {
+  return await fetchApi("auth/password/new_cancel/", props);
 }
 
 
-export type NewResetPasswordProps = {
+export type PasswordNewResetProps = {
   passwordResetKey: string,
   newPassword: string
 }
 
-export async function newResetPassword(props: NewResetPasswordProps): Promise<Password | ApiErrorCode> {
-  return await fetchApi("password/newReset/", props);
+export async function newResetPassword(props: PasswordNewResetProps): Promise<Password | AuthErrorCode> {
+  return await fetchApi("auth/password/new_reset/", props);
 }
 
-export type ViewUserProps = {
+export type UserViewProps = {
   userId?: number, //
   creationTime?: number, //
   minCreationTime?: number, //
@@ -210,11 +164,11 @@ export type ViewUserProps = {
 }
 
 
-export async function viewUser(props: ViewUserProps): Promise<User[] | ApiErrorCode> {
-  return await fetchApi("user/", props);
+export async function viewUser(props: UserViewProps): Promise<User[] | AuthErrorCode> {
+  return await fetchApi("auth/user/", props);
 }
 
-export type ViewPasswordProps = {
+export type PasswordViewProps = {
   passwordId?: number, //
   creationTime?: number, //
   minCreationTime?: number, //
@@ -228,12 +182,12 @@ export type ViewPasswordProps = {
   apiKey: string,
 }
 
-export async function viewPassword(props: ViewPasswordProps): Promise<Password[] | ApiErrorCode> {
-  return await fetchApi("password/", props);
+export async function viewPassword(props: PasswordViewProps): Promise<Password[] | AuthErrorCode> {
+  return await fetchApi("auth/password/", props);
 }
 
 
-export type ViewApiKeyProps = {
+export type ApiKeyViewProps = {
   apiKeyId?: number, //
   creatorUserId?: number, //
   creationTime?: number, //
@@ -249,10 +203,12 @@ export type ViewApiKeyProps = {
   apiKey: string,
 }
 
-export async function viewApiKey(props: ViewApiKeyProps): Promise<ApiKey[] | ApiErrorCode> {
-  return await fetchApi("apiKey/", props);
+export async function viewApiKey(props: ApiKeyViewProps): Promise<ApiKey[] | AuthErrorCode> {
+  return await fetchApi("auth/apiKey/", props);
 }
 
-export function isApiErrorCode(maybeApiErrorCode: any): maybeApiErrorCode is ApiErrorCode {
-  return typeof maybeApiErrorCode === 'string' && ApiErrorCodes.includes(maybeApiErrorCode as any);
+export function isAuthErrorCode(maybeAuthErrorCode: any): maybeAuthErrorCode is AuthErrorCode {
+  return typeof maybeAuthErrorCode === 'string' && AuthErrorCodes.includes(maybeAuthErrorCode as any);
 }
+
+export const isPasswordValid = (pass: string) => pass.length >= 8 && /\d/.test(pass);

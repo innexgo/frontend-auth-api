@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@innexgo/frontend-common@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@innexgo/frontend-common/-/frontend-common-0.0.2.tgz#24b78209772284d283bd783d8b89c2b768aca906"
+  integrity sha512-ZHEaHkse6tjbthhd8FiRWj6wxbg/GRyicMPtKfVl23TLcWzW2xpV7Ye9VgMc6ZU+cKpn2t8etffUwcgrOvaLNQ==
+
 typescript@^4.2.4:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
