@@ -1,6 +1,6 @@
 {
   "name": "@innexgo/frontend-auth-api",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Core utils and bindings to the authentication related parts of the api.",
   "main": "lib/index.js",
   "files": [
@@ -20,12 +20,12 @@
     "url": "https://github.com/innexgo/frontend-auth-api/issues"
   },
   "homepage": "https://github.com/innexgo/frontend-auth-api#readme",
-  "dependencies": { },
-  "peerDependencies" : {
+  "dependencies": {},
+  "peerDependencies": {
     "@innexgo/frontend-common": "^0.0.2"
   },
   "devDependencies": {
-    "@innexgo/frontend-common": "^0.0.2",
+    "@innexgo/frontend-common": "^0.0.3",
     "typescript": "^4.2.4"
   },
   "eslintConfig": {
