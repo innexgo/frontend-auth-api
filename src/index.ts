@@ -84,7 +84,7 @@ export type ValidApiKeyNewProps = {
 }
 
 export async function newValidApiKey(props: ValidApiKeyNewProps): Promise<ApiKey | AuthErrorCode> {
-  return await fetchApi("auth/apiKey/new_valid/", props);
+  return await fetchApi("auth/api_key/new_valid/", props);
 }
 
 export type ApiKeyNewCancelProps = {
@@ -93,7 +93,7 @@ export type ApiKeyNewCancelProps = {
 }
 
 export async function newApiKeyCancel(props: ApiKeyNewCancelProps): Promise<ApiKey | AuthErrorCode> {
-  return await fetchApi("auth/apiKey/new_cancel/", props);
+  return await fetchApi("auth/api_key/new_cancel/", props);
 }
 
 export type VerificationChallengeNewProps = {
@@ -204,7 +204,7 @@ export type ApiKeyViewProps = {
 }
 
 export async function viewApiKey(props: ApiKeyViewProps): Promise<ApiKey[] | AuthErrorCode> {
-  return await fetchApi("auth/apiKey/", props);
+  return await fetchApi("auth/api_key/", props);
 }
 
 export function isAuthErrorCode(maybeAuthErrorCode: any): maybeAuthErrorCode is AuthErrorCode {
