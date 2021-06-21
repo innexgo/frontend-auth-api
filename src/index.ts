@@ -1,5 +1,4 @@
-import { fetchApi } from '@innexgo/frontend-common';
-
+import { Result, fetchApi } from '@innexgo/frontend-common';
 export interface VerificationChallenge {
   creationTime: number,
   name: string,
@@ -77,14 +76,22 @@ export const AuthErrorCodes = [
 // Creates a union type
 export type AuthErrorCode = typeof AuthErrorCodes[number];
 
+async function fetchApiOrNetworkError<T>(url: string, props: object): Promise<Result<T, AuthErrorCode>> {
+  try {
+    return await fetchApi(url, props);
+  } catch (_) {
+    return { Err: "NETWORK_ERROR" };
+  }
+}
+
 export type ValidApiKeyNewProps = {
   userEmail: string,
   userPassword: string,
   duration: number,
 }
 
-export async function newValidApiKey(props: ValidApiKeyNewProps): Promise<ApiKey | AuthErrorCode> {
-  return await fetchApi("auth/api_key/new_valid/", props);
+export function apiKeyNewValid(props: ValidApiKeyNewProps): Promise<Result<ApiKey, AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/api_key/new_valid/", props);
 }
 
 export type ApiKeyNewCancelProps = {
@@ -92,8 +99,8 @@ export type ApiKeyNewCancelProps = {
   apiKey: string,
 }
 
-export async function newApiKeyCancel(props: ApiKeyNewCancelProps): Promise<ApiKey | AuthErrorCode> {
-  return await fetchApi("auth/api_key/new_cancel/", props);
+export function apiKeyNewCancel(props: ApiKeyNewCancelProps): Promise<Result<ApiKey, AuthErrorCode>> {
+  return fetchApi("auth/api_key/new_cancel/", props);
 }
 
 export type VerificationChallengeNewProps = {
@@ -102,24 +109,24 @@ export type VerificationChallengeNewProps = {
   userPassword: string,
 };
 
-export async function newVerificationChallenge(props: VerificationChallengeNewProps): Promise<VerificationChallenge | AuthErrorCode> {
-  return await fetchApi("auth/verification_challenge/new/", props);
+export function verificationChallengeNew(props: VerificationChallengeNewProps): Promise<Result<VerificationChallenge, AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/verification_challenge/new/", props);
 }
 
 export type UserNewProps = {
   verificationChallengeKey: string,
 };
 
-export async function newUser(props: UserNewProps): Promise<User | AuthErrorCode> {
-  return await fetchApi("auth/user/new/", props);
+export function userNew(props: UserNewProps): Promise<Result<User, AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/user/new/", props);
 }
 
 export type PasswordResetNewProps = {
   userEmail: string,
 };
 
-export async function newPasswordReset(props: PasswordResetNewProps): Promise<PasswordReset | AuthErrorCode> {
-  return await fetchApi("auth/password_reset/new/", props);
+export function passwordResetNew(props: PasswordResetNewProps): Promise<Result<PasswordReset, AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/password_reset/new/", props);
 }
 
 export type PasswordNewChangeProps = {
@@ -128,16 +135,16 @@ export type PasswordNewChangeProps = {
   apiKey: string
 }
 
-export async function newChangePassword(props: PasswordNewChangeProps): Promise<Password | AuthErrorCode> {
-  return await fetchApi("auth/password/new_change/", props);
+export function passwordNewChange(props: PasswordNewChangeProps): Promise<Result<Password, AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/password/new_change/", props);
 }
 
 export type PasswordNewCancelProps = {
   apiKey: string
 }
 
-export async function newCancelPassword(props: PasswordNewCancelProps): Promise<Password | AuthErrorCode> {
-  return await fetchApi("auth/password/new_cancel/", props);
+export function passwordNewCancel(props: PasswordNewCancelProps): Promise<Result<Password, AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/password/new_cancel/", props);
 }
 
 
@@ -146,8 +153,8 @@ export type PasswordNewResetProps = {
   newPassword: string
 }
 
-export async function newResetPassword(props: PasswordNewResetProps): Promise<Password | AuthErrorCode> {
-  return await fetchApi("auth/password/new_reset/", props);
+export function passwordNewReset(props: PasswordNewResetProps): Promise<Result<Password, AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/password/new_reset/", props);
 }
 
 export type UserViewProps = {
@@ -164,8 +171,8 @@ export type UserViewProps = {
 }
 
 
-export async function viewUser(props: UserViewProps): Promise<User[] | AuthErrorCode> {
-  return await fetchApi("auth/user/", props);
+export function userView(props: UserViewProps): Promise<Result<User[], AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/user/view", props);
 }
 
 export type PasswordViewProps = {
@@ -182,8 +189,8 @@ export type PasswordViewProps = {
   apiKey: string,
 }
 
-export async function viewPassword(props: PasswordViewProps): Promise<Password[] | AuthErrorCode> {
-  return await fetchApi("auth/password/", props);
+export function passwordView(props: PasswordViewProps): Promise<Result<Password[], AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/password/view", props);
 }
 
 
@@ -203,8 +210,8 @@ export type ApiKeyViewProps = {
   apiKey: string,
 }
 
-export async function viewApiKey(props: ApiKeyViewProps): Promise<ApiKey[] | AuthErrorCode> {
-  return await fetchApi("auth/api_key/", props);
+export function apiKeyView(props: ApiKeyViewProps): Promise<Result<ApiKey[], AuthErrorCode>> {
+  return fetchApiOrNetworkError("auth/api_key/view", props);
 }
 
 export function isAuthErrorCode(maybeAuthErrorCode: any): maybeAuthErrorCode is AuthErrorCode {
