@@ -158,15 +158,13 @@ export function passwordNewReset(props: PasswordNewResetProps): Promise<Result<P
 }
 
 export type UserViewProps = {
-  userId?: number, //
-  creationTime?: number, //
-  minCreationTime?: number, //
-  maxCreationTime?: number, //
-  userName?: string, //
-  partialUserName?: string, //
-  userEmail?: string, //
-  offset?: number,
-  count?: number,
+  userId?: number[],
+  creationTime?: number,
+  minCreationTime?: number,
+  maxCreationTime?: number,
+  userName?: string[],
+  partialUserName?: string,
+  userEmail?: string[],
   apiKey: string,
 }
 
@@ -176,16 +174,13 @@ export function userView(props: UserViewProps): Promise<Result<User[], AuthError
 }
 
 export type PasswordViewProps = {
-  passwordId?: number, //
-  creationTime?: number, //
-  minCreationTime?: number, //
-  maxCreationTime?: number, //
-  creatorUserId?: number, //
-  userId?: number, //
-  passwordKind?: PasswordKind, //
+  passwordId?: number[],
+  creationTime?: number,
+  minCreationTime?: number,
+  maxCreationTime?: number,
+  creatorUserId?: number[],
+  passwordKind?: PasswordKind,
   onlyRecent: boolean,
-  offset?: number,
-  count?: number,
   apiKey: string,
 }
 
@@ -195,18 +190,16 @@ export function passwordView(props: PasswordViewProps): Promise<Result<Password[
 
 
 export type ApiKeyViewProps = {
-  apiKeyId?: number, //
-  creatorUserId?: number, //
-  creationTime?: number, //
-  minCreationTime?: number, //
-  maxCreationTime?: number, //
-  duration?: number, //
-  minDuration?: number, //
-  maxDuration?: number, //
-  apiKeyKind?: ApiKeyKind, //
-  onlyRecent: boolean, //
-  offset?: number,
-  count?: number,
+  apiKeyId?: number[],
+  creationTime?: number,
+  minCreationTime?: number,
+  maxCreationTime?: number,
+  creatorUserId?: number[],
+  duration?: number,
+  minDuration?: number,
+  maxDuration?: number,
+  apiKeyKind?: ApiKeyKind,
+  onlyRecent: boolean,
   apiKey: string,
 }
 
@@ -217,5 +210,3 @@ export function apiKeyView(props: ApiKeyViewProps): Promise<Result<ApiKey[], Aut
 export function isAuthErrorCode(maybeAuthErrorCode: any): maybeAuthErrorCode is AuthErrorCode {
   return typeof maybeAuthErrorCode === 'string' && AuthErrorCodes.includes(maybeAuthErrorCode as any);
 }
-
-export const isPasswordValid = (pass: string) => pass.length >= 8 && /\d/.test(pass);
