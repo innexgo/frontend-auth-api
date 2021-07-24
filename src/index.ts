@@ -81,21 +81,21 @@ export const AuthErrorCodes = [
   "VERIFICATION_CHALLENGE_WRONG_KIND",
   "PARENT_PERMISSION_NONEXISTENT",
   "PARENT_PERMISSION_EXISTENT",
-  "PASSWORD_RESET_NONEXISTENT",
   "PASSWORD_EXISTENT",
   "PASSWORD_NONEXISTENT",
   "EMAIL_EXISTENT",
   "EMAIL_NONEXISTENT",
+  "PASSWORD_RESET_NONEXISTENT",
   "PASSWORD_RESET_TIMED_OUT",
   "EMAIL_BOUNCED",
   "EMAIL_UNKNOWN",
-  "NETWORK_ERROR",
   "DECODE_ERROR",
   "INTERNAL_SERVER_ERROR",
   "METHOD_NOT_ALLOWED",
   "BAD_REQUEST",
   "NOT_FOUND",
   "UNKNOWN",
+  "NETWORK",
 ] as const;
 
 // Creates a union type
@@ -105,7 +105,7 @@ async function fetchApiOrNetworkError<T>(url: string, props: object): Promise<Re
   try {
     return await fetchApi(url, props);
   } catch (_) {
-    return { Err: "NETWORK_ERROR" };
+    return { Err: "NETWORK" };
   }
 }
 
@@ -139,7 +139,7 @@ export function verificationChallengeNew(props: VerificationChallengeNewProps): 
 }
 
 export type EmailNewProps = {
-  verificationChallenge: string,
+  verificationChallengeKey: string,
 };
 
 export function emailNew(props: EmailNewProps): Promise<Result<Email, AuthErrorCode>> {
@@ -148,7 +148,7 @@ export function emailNew(props: EmailNewProps): Promise<Result<Email, AuthErrorC
 
 
 export type ParentPermissionNewProps = {
-  verificationChallenge: string,
+  verificationChallengeKey: string,
 };
 
 export function parentPermissionNew(props: ParentPermissionNewProps): Promise<Result<ParentPermission, AuthErrorCode>> {
@@ -157,8 +157,9 @@ export function parentPermissionNew(props: ParentPermissionNewProps): Promise<Re
 
 export type UserNewProps = {
   userName: string,
+  userEmail: string,
   userPassword: string,
-  olderThan13: boolean,
+  parentEmail?: string,
 };
 
 export function userNew(props: UserNewProps): Promise<Result<UserData, AuthErrorCode>> {
@@ -217,7 +218,7 @@ export type UserDataViewProps = {
   userDataId?: number[],
   minCreationTime?: number,
   maxCreationTime?: number,
-  userId?: number[],
+  creatorUserId?: number[],
   name?: string[],
   apiKey: string,
 }
@@ -300,8 +301,4 @@ export type ApiKeyViewProps = {
 
 export function apiKeyView(props: ApiKeyViewProps): Promise<Result<ApiKey[], AuthErrorCode>> {
   return fetchApiOrNetworkError("auth/api_key/view", props);
-}
-
-export function isAuthErrorCode(maybeAuthErrorCode: any): maybeAuthErrorCode is AuthErrorCode {
-  return typeof maybeAuthErrorCode === 'string' && AuthErrorCodes.includes(maybeAuthErrorCode as any);
 }
