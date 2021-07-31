@@ -11,25 +11,25 @@ export interface User {
 }
 
 export interface UserData {
-    userDataId:number,
-    creationTime:number,
-    creator:User,
-    name:string
+  userDataId: number,
+  creationTime: number,
+  creatorUserId: number,
+  name: string
 }
 
 export interface Email {
-    emailId: number,
-    creationTime: number,
-    creator:User,
-    verificationChallenge: VerificationChallenge
+  emailId: number,
+  creationTime: number,
+  creatorUserId: number,
+  verificationChallenge: VerificationChallenge
 }
 
 export interface ParentPermission {
-    parentPermissionId: number,
-    creationTime: number,
-    user:User,
-    // if this is absent, then it means that the user said they were over 13
-    verificationChallenge?: VerificationChallenge
+  parentPermissionId: number,
+  creationTime: number,
+  userId: number,
+  // if this is absent, then it means that the user said they were over 13
+  verificationChallenge?: VerificationChallenge
 }
 
 export interface PasswordReset {
@@ -39,7 +39,7 @@ export interface PasswordReset {
 export type Password = {
   passwordId: number,
   creationTime: number,
-  creator: User,
+  creatorUserId: number,
   passwordReset?: PasswordReset
 }
 
@@ -48,7 +48,7 @@ export type ApiKeyKind = "VALID" | "CANCEL";
 export interface ApiKey {
   apiKeyId: number,
   creationTime: number,
-  creator: User,
+  creatorUserId: number,
   duration: number, // only valid if ApiKeyKind isn't CANCEL
   key: string, // only valid if ApiKeyKind isn't CANCEL
   apiKeyKind: ApiKeyKind,
@@ -168,7 +168,7 @@ export function userNew(props: UserNewProps): Promise<Result<UserData, AuthError
 
 export type UserDataNewProps = {
   userName: string,
-  apiKey:string
+  apiKey: string
 };
 
 export function userDataNew(props: UserDataNewProps): Promise<Result<UserData, AuthErrorCode>> {
@@ -220,6 +220,7 @@ export type UserDataViewProps = {
   maxCreationTime?: number,
   creatorUserId?: number[],
   name?: string[],
+  onlyRecent: boolean,
   apiKey: string,
 }
 

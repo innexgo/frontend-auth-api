@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@innexgo/frontend-common@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@innexgo/frontend-common/-/frontend-common-0.0.7.tgz#13d1321cf7404c9fbed17794ca440b591fcd8cb1"
-  integrity sha512-laulKRn82eDttGQHtd6v90wItsrnB0tLznkdLtYzMB0g56PxkvaGpCI+FETinKmgWvwph8JxPz+YloVPLVSWNA==
+"@innexgo/frontend-common@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@innexgo/frontend-common/-/frontend-common-0.0.8.tgz#b7c35d36afc9919d000e6298192992987abe716d"
+  integrity sha512-Ba7iRQy7Ok8x1gk7w7+4191K1bPs0YBS9CmuDzmT1vC0kV13x3jXwQXgAoZqNLw0U/+DmFwcrmmx8Q7jItGNSA==
 
 typescript@^4.2.4:
   version "4.3.5"
