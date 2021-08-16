@@ -54,11 +54,6 @@ export interface ApiKey {
   apiKeyKind: ApiKeyKind,
 }
 
-export interface AuthenticatedComponentProps {
-  apiKey: ApiKey
-  setApiKey: (data: ApiKey | null) => void
-}
-
 export const AuthErrorCodes = [
   "NO_CAPABILITY",
   "API_KEY_UNAUTHORIZED",
