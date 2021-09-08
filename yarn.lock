@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@innexgo/frontend-common@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@innexgo/frontend-common/-/frontend-common-0.0.9.tgz#5ee992474433bffd146acb2872ce1359dfac528f"
-  integrity sha512-9vX5e/yPOAMAKzu2T3TDaeXF9ycajUFs6WrFWXHW9fZO34PGyvRJ1WXnRiN8nCh8mPg8DkJBQ4Cnb1cWpG7cqg==
+"@innexgo/frontend-common@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@innexgo/frontend-common/-/frontend-common-0.0.10.tgz#e4acd9a00c4bdace68a723eb8f9668ae559bdb07"
+  integrity sha512-OLhWApJLoqyGWZDnCIUDYTPKWpqpLXHYi9G11iL7QanZcoIjY010R65l2NgjWGzAi7kHFknbvAzDBrkooMhmxA==
 
-typescript@^4.2.4:
-  version "4.3.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.5.tgz#4d1c37cc16e893973c45a06886b7113234f119f4"
-  integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
+typescript@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.2.tgz#6d618640d430e3569a1dfb44f7d7e600ced3ee86"
+  integrity sha512-gzP+t5W4hdy4c+68bfcv0t400HVJMMd2+H9B7gae1nQlBzCqvrXX+6GL/b3GAgyTH966pzrZ70/fRjwAtZksSQ==
