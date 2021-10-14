@@ -98,7 +98,9 @@ export type AuthErrorCode = typeof AuthErrorCodes[number];
 
 async function fetchApiOrNetworkError<T>(url: string, props: object): Promise<Result<T, AuthErrorCode>> {
   try {
-    return { Ok: await fetchApi(url, props) };
+    // the reason we don't have to worry about wrapping in Ok is that rust already
+    // wraps successful values with Ok, and unsuccessful values with Err
+    return await fetchApi(url, props);
   } catch (_) {
     return { Err: "NETWORK" };
   }
