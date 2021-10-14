@@ -1,4 +1,4 @@
-import { Result, fetchApi } from '@innexgo/frontend-common';
+import { Result, fetchApi, apiUrl } from '@innexgo/frontend-common';
 export interface VerificationChallenge {
   creationTime: number,
   to_parent: boolean,
@@ -98,14 +98,14 @@ export type AuthErrorCode = typeof AuthErrorCodes[number];
 
 async function fetchApiOrNetworkError<T>(url: string, props: object): Promise<Result<T, AuthErrorCode>> {
   try {
-    return await fetchApi(url, props);
+    return { Ok: await fetchApi(url, props) };
   } catch (_) {
     return { Err: "NETWORK" };
   }
 }
 
 const undefToStr= (s:string|undefined) =>
-  s === undefined ? "" : s
+  s === undefined ? apiUrl() : s
 
 export type ValidApiKeyNewProps = {
   userEmail: string,
@@ -123,7 +123,7 @@ export type ApiKeyNewCancelProps = {
 }
 
 export function apiKeyNewCancel(props: ApiKeyNewCancelProps, server?:string): Promise<Result<ApiKey, AuthErrorCode>> {
-  return fetchApi(undefToStr(server) + "auth/api_key/new_cancel/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "auth/api_key/new_cancel/", props);
 }
 
 export type VerificationChallengeNewProps = {
