@@ -116,7 +116,7 @@ export type ValidApiKeyNewProps = {
 }
 
 export function apiKeyNewValid(props: ValidApiKeyNewProps, server?:string): Promise<Result<ApiKey, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/api_key/new_valid/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/api_key/new_valid/", props);
 }
 
 export type ApiKeyNewCancelProps = {
@@ -125,7 +125,7 @@ export type ApiKeyNewCancelProps = {
 }
 
 export function apiKeyNewCancel(props: ApiKeyNewCancelProps, server?:string): Promise<Result<ApiKey, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/api_key/new_cancel/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/api_key/new_cancel/", props);
 }
 
 export type VerificationChallengeNewProps = {
@@ -135,7 +135,7 @@ export type VerificationChallengeNewProps = {
 };
 
 export function verificationChallengeNew(props: VerificationChallengeNewProps, server?:string): Promise<Result<VerificationChallenge, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/verification_challenge/new/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/verification_challenge/new/", props);
 }
 
 export type EmailNewProps = {
@@ -143,7 +143,7 @@ export type EmailNewProps = {
 };
 
 export function emailNew(props: EmailNewProps, server?:string): Promise<Result<Email, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/email/new/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/email/new/", props);
 }
 
 
@@ -152,7 +152,7 @@ export type ParentPermissionNewProps = {
 };
 
 export function parentPermissionNew(props: ParentPermissionNewProps, server?:string): Promise<Result<ParentPermission, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/parent_permission/new/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/parent_permission/new/", props);
 }
 
 export type UserNewProps = {
@@ -163,7 +163,7 @@ export type UserNewProps = {
 };
 
 export function userNew(props: UserNewProps, server?:string): Promise<Result<UserData, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/user/new/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/user/new/", props);
 }
 
 export type UserDataNewProps = {
@@ -172,7 +172,7 @@ export type UserDataNewProps = {
 };
 
 export function userDataNew(props: UserDataNewProps, server?:string): Promise<Result<UserData, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/user_data/new/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/user_data/new/", props);
 }
 
 export type PasswordResetNewProps = {
@@ -180,7 +180,7 @@ export type PasswordResetNewProps = {
 };
 
 export function passwordResetNew(props: PasswordResetNewProps, server?:string): Promise<Result<PasswordReset, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/password_reset/new/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/password_reset/new/", props);
 }
 
 export type PasswordNewChangeProps = {
@@ -190,7 +190,7 @@ export type PasswordNewChangeProps = {
 }
 
 export function passwordNewChange(props: PasswordNewChangeProps, server?:string): Promise<Result<Password, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/password/new_change/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/password/new_change/", props);
 }
 
 export type PasswordNewResetProps = {
@@ -199,7 +199,7 @@ export type PasswordNewResetProps = {
 }
 
 export function passwordNewReset(props: PasswordNewResetProps, server?:string): Promise<Result<Password, AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/password/new_reset/", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/password/new_reset/", props);
 }
 
 export type UserViewProps = {
@@ -211,7 +211,7 @@ export type UserViewProps = {
 
 
 export function userView(props: UserViewProps, server?:string): Promise<Result<User[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/user/view", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/user/view", props);
 }
 
 export type UserDataViewProps = {
@@ -226,7 +226,7 @@ export type UserDataViewProps = {
 
 
 export function userDataView(props: UserDataViewProps, server?:string): Promise<Result<UserData[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/user_data/view", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/user_data/view", props);
 }
 
 export type VerificationChallengeViewProps = {
@@ -240,7 +240,7 @@ export type VerificationChallengeViewProps = {
 
 
 export function verificationChallengeView(props: VerificationChallengeViewProps, server?:string): Promise<Result<VerificationChallenge[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/verification_challenge/view", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/verification_challenge/view", props);
 }
 
 export type EmailViewProps = {
@@ -254,7 +254,7 @@ export type EmailViewProps = {
 }
 
 export function emailView(props: EmailViewProps, server?:string): Promise<Result<Email[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/email/view", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/email/view", props);
 }
 
 export type ParentPermissionViewProps = {
@@ -269,7 +269,7 @@ export type ParentPermissionViewProps = {
 }
 
 export function parentPermissionView(props: ParentPermissionViewProps, server?:string): Promise<Result<ParentPermission[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/parent_permission/view", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/parent_permission/view", props);
 }
 
 export type PasswordViewProps = {
@@ -283,7 +283,7 @@ export type PasswordViewProps = {
 }
 
 export function passwordView(props: PasswordViewProps, server?:string): Promise<Result<Password[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/password/view", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/password/view", props);
 }
 
 export type ApiKeyViewProps = {
@@ -301,5 +301,5 @@ export type ApiKeyViewProps = {
 }
 
 export function apiKeyView(props: ApiKeyViewProps, server?:string): Promise<Result<ApiKey[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "auth/api_key/view", props);
+  return fetchApiOrNetworkError(undefToStr(server) + "/auth/api_key/view", props);
 }
