@@ -1,7 +1,7 @@
 import { Result } from '@innexgo/frontend-common';
 export interface VerificationChallenge {
     creationTime: number;
-    to_parent: boolean;
+    toParent: boolean;
     email: string;
 }
 export interface User {
@@ -117,20 +117,11 @@ export declare type UserDataViewProps = {
     apiKey: string;
 };
 export declare function userDataView(props: UserDataViewProps, server?: string): Promise<Result<UserData[], AuthErrorCode>>;
-export declare type VerificationChallengeViewProps = {
-    minCreationTime?: number;
-    maxCreationTime?: number;
-    creatorUserId?: number[];
-    to_parent?: boolean;
-    email?: string[];
-    apiKey: string;
-};
-export declare function verificationChallengeView(props: VerificationChallengeViewProps, server?: string): Promise<Result<VerificationChallenge[], AuthErrorCode>>;
 export declare type EmailViewProps = {
     emailId?: number[];
     minCreationTime?: number;
     maxCreationTime?: number;
-    view_parent: boolean;
+    toParent: boolean;
     onlyRecent: boolean;
     creatorUserId?: number[];
     email?: string[];

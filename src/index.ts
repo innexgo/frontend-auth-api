@@ -1,7 +1,7 @@
 import { Result, fetchApi, apiUrl } from '@innexgo/frontend-common';
 export interface VerificationChallenge {
   creationTime: number,
-  to_parent: boolean,
+  toParent: boolean,
   email: string,
 }
 
@@ -226,25 +226,11 @@ export function userDataView(props: UserDataViewProps, server?: string): Promise
   return fetchApiOrNetworkError(undefToStr(server) + "/auth/user_data/view", props);
 }
 
-export type VerificationChallengeViewProps = {
-  minCreationTime?: number,
-  maxCreationTime?: number,
-  creatorUserId?: number[],
-  to_parent?: boolean,
-  email?: string[],
-  apiKey: string,
-}
-
-
-export function verificationChallengeView(props: VerificationChallengeViewProps, server?: string): Promise<Result<VerificationChallenge[], AuthErrorCode>> {
-  return fetchApiOrNetworkError(undefToStr(server) + "/auth/verification_challenge/view", props);
-}
-
 export type EmailViewProps = {
   emailId?: number[],
   minCreationTime?: number,
   maxCreationTime?: number,
-  view_parent: boolean,
+  toParent: boolean,
   onlyRecent: boolean,
   creatorUserId?: number[],
   email?: string[],
