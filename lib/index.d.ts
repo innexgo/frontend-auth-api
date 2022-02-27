@@ -66,6 +66,7 @@ export declare type VerificationChallengeNewProps = {
 export declare function verificationChallengeNew(props: VerificationChallengeNewProps, server?: string): Promise<Result<VerificationChallenge, AuthErrorCode>>;
 export declare type EmailNewProps = {
     verificationChallengeKey: string;
+    toParent: boolean;
 };
 export declare function emailNew(props: EmailNewProps, server?: string): Promise<Result<Email, AuthErrorCode>>;
 export declare type UserNewProps = {
@@ -73,8 +74,9 @@ export declare type UserNewProps = {
     realname: string;
     password: string;
     dateofbirth: number;
+    apiKeyDuration: number;
 };
-export declare function userNew(props: UserNewProps, server?: string): Promise<Result<UserData, AuthErrorCode>>;
+export declare function userNew(props: UserNewProps, server?: string): Promise<Result<ApiKey, AuthErrorCode>>;
 export declare type UserDataNewProps = {
     username: string;
     realname: string;

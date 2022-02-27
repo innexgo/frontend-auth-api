@@ -141,6 +141,7 @@ export function verificationChallengeNew(props: VerificationChallengeNewProps, s
 
 export type EmailNewProps = {
   verificationChallengeKey: string,
+  toParent: boolean,
 };
 
 export function emailNew(props: EmailNewProps, server?: string): Promise<Result<Email, AuthErrorCode>> {
@@ -152,9 +153,10 @@ export type UserNewProps = {
   realname: string,
   password: string,
   dateofbirth: number,
+  apiKeyDuration: number,
 };
 
-export function userNew(props: UserNewProps, server?: string): Promise<Result<UserData, AuthErrorCode>> {
+export function userNew(props: UserNewProps, server?: string): Promise<Result<ApiKey, AuthErrorCode>> {
   return fetchApiOrNetworkError(undefToStr(server) + "/auth/user/new/", props);
 }
 
