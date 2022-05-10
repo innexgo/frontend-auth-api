@@ -172,7 +172,7 @@ export function userDataNew(props: UserDataNewProps, server?: string): Promise<R
 }
 
 export type PasswordResetNewProps = {
-  userEmail: string,
+  email: string,
 };
 
 export function passwordResetNew(props: PasswordResetNewProps, server?: string): Promise<Result<PasswordReset, AuthErrorCode>> {

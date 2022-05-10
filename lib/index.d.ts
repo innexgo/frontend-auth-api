@@ -85,7 +85,7 @@ export declare type UserDataNewProps = {
 };
 export declare function userDataNew(props: UserDataNewProps, server?: string): Promise<Result<UserData, AuthErrorCode>>;
 export declare type PasswordResetNewProps = {
-    userEmail: string;
+    email: string;
 };
 export declare function passwordResetNew(props: PasswordResetNewProps, server?: string): Promise<Result<PasswordReset, AuthErrorCode>>;
 export declare type PasswordNewChangeProps = {
