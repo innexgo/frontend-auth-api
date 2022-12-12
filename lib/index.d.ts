@@ -24,13 +24,13 @@ export interface Email {
 export interface PasswordReset {
     creationTime: number;
 }
-export declare type Password = {
+export type Password = {
     passwordId: number;
     creationTime: number;
     creatorUserId: number;
     passwordReset?: PasswordReset;
 };
-export declare type ApiKeyKind = "VALID" | "NO_EMAIL" | "NO_PARENT" | "CANCEL";
+export type ApiKeyKind = "VALID" | "NO_EMAIL" | "NO_PARENT" | "CANCEL";
 export interface ApiKey {
     apiKeyId: number;
     creationTime: number;
@@ -40,36 +40,36 @@ export interface ApiKey {
     apiKeyKind: ApiKeyKind;
 }
 export declare const AuthErrorCodes: readonly ["NO_CAPABILITY", "API_KEY_UNAUTHORIZED", "NO_PERMISSION", "PASSWORD_INCORRECT", "PASSWORD_INSECURE", "PASSWORD_CANNOT_CREATE_FOR_OTHERS", "USER_NONEXISTENT", "USER_DATA_NONEXISTENT", "API_KEY_NONEXISTENT", "USER_USERNAME_INVALID", "USER_USERNAME_TAKEN", "USER_REALNAME_INVALID", "USER_DATEOFBIRTH_INVALID", "NEGATIVE_DURATION", "CANNOT_ALTER_PAST", "VERIFICATION_CHALLENGE_NONEXISTENT", "VERIFICATION_CHALLENGE_TIMED_OUT", "VERIFICATION_CHALLENGE_USED", "VERIFICATION_CHALLENGE_WRONG_KIND", "PASSWORD_EXISTENT", "PASSWORD_NONEXISTENT", "EMAIL_EXISTENT", "EMAIL_NONEXISTENT", "PASSWORD_RESET_NONEXISTENT", "PASSWORD_RESET_TIMED_OUT", "EMAIL_BOUNCED", "EMAIL_COOLDOWN", "DECODE_ERROR", "INTERNAL_SERVER_ERROR", "METHOD_NOT_ALLOWED", "BAD_REQUEST", "NOT_FOUND", "UNKNOWN", "NETWORK"];
-export declare type AuthErrorCode = typeof AuthErrorCodes[number];
-export declare type ApiKeyNewWithEmailProps = {
+export type AuthErrorCode = typeof AuthErrorCodes[number];
+export type ApiKeyNewWithEmailProps = {
     email: string;
     password: string;
     duration: number;
 };
 export declare function apiKeyNewWithEmail(props: ApiKeyNewWithEmailProps, server?: string): Promise<Result<ApiKey, AuthErrorCode>>;
-export declare type ApiKeyNewWithUsernameProps = {
+export type ApiKeyNewWithUsernameProps = {
     username: string;
     password: string;
     duration: number;
 };
 export declare function apiKeyNewWithUsername(props: ApiKeyNewWithUsernameProps, server?: string): Promise<Result<ApiKey, AuthErrorCode>>;
-export declare type ApiKeyNewCancelProps = {
+export type ApiKeyNewCancelProps = {
     apiKeyToCancel: string;
     apiKey: string;
 };
 export declare function apiKeyNewCancel(props: ApiKeyNewCancelProps, server?: string): Promise<Result<ApiKey, AuthErrorCode>>;
-export declare type VerificationChallengeNewProps = {
+export type VerificationChallengeNewProps = {
     email: string;
     toParent: boolean;
     apiKey: string;
 };
 export declare function verificationChallengeNew(props: VerificationChallengeNewProps, server?: string): Promise<Result<VerificationChallenge, AuthErrorCode>>;
-export declare type EmailNewProps = {
+export type EmailNewProps = {
     verificationChallengeKey: string;
     toParent: boolean;
 };
 export declare function emailNew(props: EmailNewProps, server?: string): Promise<Result<Email, AuthErrorCode>>;
-export declare type UserNewProps = {
+export type UserNewProps = {
     username: string;
     realname: string;
     password: string;
@@ -77,36 +77,36 @@ export declare type UserNewProps = {
     apiKeyDuration: number;
 };
 export declare function userNew(props: UserNewProps, server?: string): Promise<Result<ApiKey, AuthErrorCode>>;
-export declare type UserDataNewProps = {
+export type UserDataNewProps = {
     username: string;
     realname: string;
     dateofbirth: number;
     apiKey: string;
 };
 export declare function userDataNew(props: UserDataNewProps, server?: string): Promise<Result<UserData, AuthErrorCode>>;
-export declare type PasswordResetNewProps = {
+export type PasswordResetNewProps = {
     email: string;
 };
 export declare function passwordResetNew(props: PasswordResetNewProps, server?: string): Promise<Result<PasswordReset, AuthErrorCode>>;
-export declare type PasswordNewChangeProps = {
+export type PasswordNewChangeProps = {
     oldPassword: string;
     newPassword: string;
     apiKey: string;
 };
 export declare function passwordNewChange(props: PasswordNewChangeProps, server?: string): Promise<Result<Password, AuthErrorCode>>;
-export declare type PasswordNewResetProps = {
+export type PasswordNewResetProps = {
     passwordResetKey: string;
     newPassword: string;
 };
 export declare function passwordNewReset(props: PasswordNewResetProps, server?: string): Promise<Result<Password, AuthErrorCode>>;
-export declare type UserViewProps = {
+export type UserViewProps = {
     userId?: number[];
     minCreationTime?: number;
     maxCreationTime?: number;
     apiKey: string;
 };
 export declare function userView(props: UserViewProps, server?: string): Promise<Result<User[], AuthErrorCode>>;
-export declare type UserDataViewProps = {
+export type UserDataViewProps = {
     userDataId?: number[];
     minCreationTime?: number;
     maxCreationTime?: number;
@@ -119,7 +119,7 @@ export declare type UserDataViewProps = {
     apiKey: string;
 };
 export declare function userDataView(props: UserDataViewProps, server?: string): Promise<Result<UserData[], AuthErrorCode>>;
-export declare type EmailViewProps = {
+export type EmailViewProps = {
     emailId?: number[];
     minCreationTime?: number;
     maxCreationTime?: number;
@@ -130,7 +130,7 @@ export declare type EmailViewProps = {
     apiKey: string;
 };
 export declare function emailView(props: EmailViewProps, server?: string): Promise<Result<Email[], AuthErrorCode>>;
-export declare type PasswordViewProps = {
+export type PasswordViewProps = {
     passwordId?: number[];
     minCreationTime?: number;
     maxCreationTime?: number;
@@ -140,7 +140,7 @@ export declare type PasswordViewProps = {
     apiKey: string;
 };
 export declare function passwordView(props: PasswordViewProps, server?: string): Promise<Result<Password[], AuthErrorCode>>;
-export declare type ApiKeyViewProps = {
+export type ApiKeyViewProps = {
     apiKeyId?: number[];
     creationTime?: number;
     minCreationTime?: number;
