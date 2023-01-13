@@ -1,4 +1,14 @@
 import { Result, fetchApi, apiUrl } from '@innexgo/frontend-common';
+
+export interface Info {
+  service: String,
+  versionMajor: number,
+  versionMinor: number,
+  versionRev: number,
+  siteExternalUrl: string,
+  permittedSources: string[],
+}
+
 export interface VerificationChallenge {
   creationTime: number,
   toParent: boolean,
@@ -103,6 +113,12 @@ async function fetchApiOrNetworkError<T>(url: string, props: object): Promise<Re
 const undefToStr = (s: string | undefined) =>
   s === undefined ? apiUrl() : s
 
+
+export function info(server?: string): Promise<Result<Info, AuthErrorCode>> {
+  return fetchApiOrNetworkError(undefToStr(server) + "auth/info", {});
+}
+
+
 export type ApiKeyNewWithEmailProps = {
   email: string,
   password: string,
@@ -134,7 +150,7 @@ export function apiKeyNewCancel(props: ApiKeyNewCancelProps, server?: string): P
 
 export type VerificationChallengeNewProps = {
   email: string,
- toParent: boolean,
+  toParent: boolean,
   apiKey: string,
 };
 
