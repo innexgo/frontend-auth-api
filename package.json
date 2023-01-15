@@ -1,6 +1,6 @@
 {
   "name": "@innexgo/frontend-auth-api",
-  "version": "0.2.48",
+  "version": "0.2.49",
   "description": "Core utils and bindings to the authentication related parts of the api.",
   "main": "lib/index.js",
   "files": [
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/innexgo/frontend-auth-api#readme",
   "dependencies": {},
   "peerDependencies": {
-    "@innexgo/frontend-common": "^0.0.16"
+    "@innexgo/frontend-common": "^0.0.17"
   },
   "devDependencies": {
     "typescript": "^4.9.4"
