@@ -1,6 +1,6 @@
 {
   "name": "@innexgo/frontend-auth-api",
-  "version": "0.2.49",
+  "version": "0.2.50",
   "description": "Core utils and bindings to the authentication related parts of the api.",
   "main": "lib/index.js",
   "files": [
